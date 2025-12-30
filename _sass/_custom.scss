@@ -1,0 +1,117 @@
+.edu-card{
+  border: 1px solid rgba(0,0,0,0.12);
+  border-radius: 14px;
+  padding: 16px 18px;
+  margin: 18px 0;
+  display: flex;
+  align-items: flex-start;
+  gap: 18px;
+  background: rgba(255,255,255,0.6);
+}
+
+.edu-left{
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.edu-right{
+  flex: 0 0 auto;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding-top: 4px;
+}
+
+.edu-logo{
+  width: 115px;
+  max-width: 140px;
+  height: auto;
+  object-fit: contain;
+}
+
+.edu-meta{
+  margin-top: 6px;
+  margin-bottom: 12px;
+  line-height: 1.35;
+}
+
+.edu-time{
+  opacity: 0.85;
+}
+
+.edu-subtitle{
+  margin-top: 8px;
+}
+
+/* 手机端改成上下排 */
+@media (max-width: 768px){
+  .edu-card{
+    flex-direction: column;
+  }
+  .edu-logo{
+    width: 95px;
+  }
+}
+
+.edu-summary-card{
+  border: 1px solid rgba(0,0,0,0.12);
+  border-radius: 14px;
+  padding: 16px 18px;
+  margin: 14px 0 20px;
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  background: rgba(255,255,255,0.6);
+}
+
+.edu-summary-title{
+  margin: 0 0 10px 0;
+}
+
+.edu-summary-item{
+  margin: 10px 0;
+}
+
+.edu-school{
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.edu-meta{
+  margin-top: 4px;
+  opacity: 0.85;
+  line-height: 1.35;
+}
+
+.edu-summary-right{
+  flex: 0 0 auto;
+  display: flex;
+  align-items: flex-start;
+  padding-top: 4px;
+}
+
+.edu-summary-link{
+  white-space: nowrap;
+}
+
+@media (max-width: 768px){
+  .edu-summary-card{
+    flex-direction: column;
+  }
+  .edu-summary-right{
+    padding-top: 0;
+  }
+}
+/* Global link color (site-wide) */
+a:link,
+a:visited,
+a:hover,
+a:active,
+a:focus {
+  color: #0B3D91 !important;  /* deep blue */
+}
+
+a:hover,
+a:focus {
+  text-decoration: underline;
+}
