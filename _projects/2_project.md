@@ -1,81 +1,71 @@
 ---
 layout: page
-title: project 2
-description: a project with a background image and giscus comments
-img: assets/img/3.jpg
-importance: 2
+title: Quadruped Locomotion with CPG-RL
+description: RL-augmented CPG locomotion in PyBullet with physically interpretable obs/action/reward design; omnidirectional velocity tracking and slope locomotion.
+img: assets/img/projects/2/cover.jpg
+importance: 1
 category: work
-giscus_comments: true
 ---
 
-Every project has a beautiful feature showcase page.
-It's easy to include images in a flexible 3-column grid format.
-Make your photos 1/3, 2/3, or full width.
+*Mini-Project for EPFL Legged Robots Course*
 
-To give your project a background in the portfolio page, just add the img tag to the front matter like so:
+## Overview
+This project develops **RL-augmented CPG locomotion controllers** for a quadruped robot in **PyBullet**, trained with **Stable-Baselines3 PPO**. We designed **physically interpretable observation/action spaces and reward functions**, achieving **omnidirectional velocity tracking** and **stable locomotion on inclined terrain**. 
 
-    ---
-    layout: page
-    title: project
-    description: a project with a background image
-    img: /assets/img/12.jpg
-    ---
+---
 
-<div class="row">
-    <div class="col-sm mt-3 mt-md-0">
-        {% include figure.liquid loading="eager" path="assets/img/1.jpg" title="example image" class="img-fluid rounded z-depth-1" %}
-    </div>
-    <div class="col-sm mt-3 mt-md-0">
-        {% include figure.liquid loading="eager" path="assets/img/3.jpg" title="example image" class="img-fluid rounded z-depth-1" %}
-    </div>
-    <div class="col-sm mt-3 mt-md-0">
-        {% include figure.liquid loading="eager" path="assets/img/5.jpg" title="example image" class="img-fluid rounded z-depth-1" %}
-    </div>
-</div>
-<div class="caption">
-    Caption photos easily. On the left, a road goes through a tunnel. Middle, leaves artistically fall in a hipster photoshoot. Right, in another hipster photoshoot, a lumberjack grasps a handful of pine needles.
-</div>
-<div class="row">
-    <div class="col-sm mt-3 mt-md-0">
-        {% include figure.liquid loading="eager" path="assets/img/5.jpg" title="example image" class="img-fluid rounded z-depth-1" %}
-    </div>
-</div>
-<div class="caption">
-    This image can also have a caption. It's like magic.
-</div>
+## Highlights
+- Trained **PPO** locomotion policies with a **CPG-modulation action space** and compared against **Cartesian-PD action spaces**. 
+- Built **three observation configurations** (full / medium / minimal) and analyzed learning stability vs. sensor richness. 
+- Designed **velocity-tracking rewards** (vx, vy, ωz) with stability & energy penalties, enabling **omnidirectional command tracking**. 
+- Achieved **slope locomotion** with generalization up to **pitch ≈ 0.275 rad** .  
 
-You can also put regular text between your rows of images.
-Say you wanted to write a little bit about your project before you posted the rest of the images.
-You describe how you toiled, sweated, _bled_ for your project, and then... you reveal its glory in the next row of images.
+---
 
-<div class="row justify-content-sm-center">
-    <div class="col-sm-8 mt-3 mt-md-0">
-        {% include figure.liquid path="assets/img/6.jpg" title="example image" class="img-fluid rounded z-depth-1" %}
-    </div>
-    <div class="col-sm-4 mt-3 mt-md-0">
-        {% include figure.liquid path="assets/img/11.jpg" title="example image" class="img-fluid rounded z-depth-1" %}
-    </div>
-</div>
-<div class="caption">
-    You can also have artistically styled 2/3 + 1/3 images, like these.
-</div>
+## Technical Approach
 
-The code is simple.
-Just wrap your images with `<div class="col-sm">` and place them inside `<div class="row">` (read more about the <a href="https://getbootstrap.com/docs/4.4/layout/grid/">Bootstrap Grid</a> system).
-To make images responsive, add `img-fluid` class to each; for rounded corners and shadows use `rounded` and `z-depth-1` classes.
-Here's the code for the last row of images above:
+### 1) CPG + Low-level Control
+We used CPG oscillators to generate rhythmic gait signals and mapped them to foot trajectories. Low-level tracking was done with **joint-space PD** and **Cartesian-space PD**, and we tuned gains based on the shared second-order closed-loop dynamics interpretation (mass–spring–damper form). 
 
-{% raw %}
+### 2) RL Formulation (SB3 PPO)
+**Algorithm:** Proximal Policy Optimization (PPO) in Stable-Baselines3, with observation normalization via **VecNormalize** for stability.
 
-```html
-<div class="row justify-content-sm-center">
-  <div class="col-sm-8 mt-3 mt-md-0">
-    {% include figure.liquid path="assets/img/6.jpg" title="example image" class="img-fluid rounded z-depth-1" %}
-  </div>
-  <div class="col-sm-4 mt-3 mt-md-0">
-    {% include figure.liquid path="assets/img/11.jpg" title="example image" class="img-fluid rounded z-depth-1" %}
-  </div>
-</div>
-```
 
-{% endraw %}
+---
+
+## Results
+
+### Omnidirectional Velocity Tracking
+Because the reward explicitly includes both **x/y linear velocities** and **yaw rate**, the learned controller can track multi-axis commands (e.g., simultaneous motion in x and y). 
+
+### Action Space Comparison (CPG-RL vs Cartesian)
+Under comparable training, the **CPG-based policy** produces more structured periodic gaits, while Cartesian action spaces can converge but tend to yield less natural coordination and different efficiency characteristics. 
+
+
+### Slope Locomotion
+Training on slope **pitch ≈ 0.2 rad** and evaluating on steeper terrains, the policy can reliably traverse up to **pitch ≈ 0.275 rad** (with occasional success at 0.3 rad). 
+
+---
+
+## Media
+
+<video controls playsinline class="img-fluid rounded z-depth-1" style="width: 100%;">
+  <source src="{{ '/assets/video/RL_SLOPE_NormalSpeed.mp4' | relative_url }}" type="video/mp4">
+
+  Your browser does not support the video tag.
+</video>
+
+
+---
+
+## Tech Stack
+- **Simulation:** PyBullet  
+- **RL:** Stable-Baselines3 (PPO), VecNormalize  
+- **Control:** CPG-based gait generation, inverse kinematics, joint PD / Cartesian PD  
+- **Evaluation:** velocity tracking (including omnidirectional), robustness (noise), slope locomotion :contentReference[oaicite:16]{index=16}  
+
+---
+
+## Links
+- Report: https://github.com/dzhou20/epfl-legged-robot-project-2025/blob/main/lr_mp2_group_21/LR_mp2_group_21_report.pdf
+- Code: https://github.com/dzhou20/epfl-legged-robot-project-2025

@@ -1,81 +1,118 @@
 ---
 layout: page
-title: project 1
-description: with background image
-img: assets/img/12.jpg
-importance: 1
+title: Mobile Logistics Robot
+description: From-scratch mecanum AGV + linkage arm + ROS navigation (SLAM/AMCL/A*/TEB) + vision-to-grasp pipeline
+img: assets/img/projects/1/cover.png
+importance: 2
 category: work
-related_publications: true
 ---
 
-Every project has a beautiful feature showcase page.
-It's easy to include images in a flexible 3-column grid format.
-Make your photos 1/3, 2/3, or full width.
+## Overview
+This project delivers a **mobile manipulation system** that integrates an omnidirectional AGV, a linkage-based arm and gripper, and a ROS-centered software stack to support **autonomous navigation** and an end-to-end **vision-based grasping loop**.
 
-To give your project a background in the portfolio page, just add the img tag to the front matter like so:
 
-    ---
-    layout: page
-    title: project
-    description: a project with a background image
-    img: /assets/img/12.jpg
-    ---
+
+---
+
+## Phase I — “From Scratch” Mechanical Mobile Manipulator
+
 
 <div class="row">
-    <div class="col-sm mt-3 mt-md-0">
-        {% include figure.liquid loading="eager" path="assets/img/1.jpg" title="example image" class="img-fluid rounded z-depth-1" %}
-    </div>
-    <div class="col-sm mt-3 mt-md-0">
-        {% include figure.liquid loading="eager" path="assets/img/3.jpg" title="example image" class="img-fluid rounded z-depth-1" %}
-    </div>
-    <div class="col-sm mt-3 mt-md-0">
-        {% include figure.liquid loading="eager" path="assets/img/5.jpg" title="example image" class="img-fluid rounded z-depth-1" %}
-    </div>
+  <div class="col-sm mt-3 mt-md-0">
+    {% include figure.liquid path="assets/img/projects/1/phase1_m.png"
+      title="Phase I Modeling" class="img-fluid rounded z-depth-1" %}
+  </div>
+  <div class="col-sm mt-3 mt-md-0">
+    {% include figure.liquid path="assets/img/projects/1/phase1.jpg"
+      title="Phase I Robot" class="img-fluid rounded z-depth-1" %}
+  </div>
 </div>
-<div class="caption">
-    Caption photos easily. On the left, a road goes through a tunnel. Middle, leaves artistically fall in a hipster photoshoot. Right, in another hipster photoshoot, a lumberjack grasps a handful of pine needles.
-</div>
+
+
+### Requirements & Targets
+- Built an **AGV-based mobile manipulator** for long-range pick-and-place.
+- Designed to meet report-defined constraints on **DOF**, **arm reach**, and **platform mobility speed**.
+
+### Systematic Concept Selection
+- Followed a structured workflow: **functional decomposition → morphological matrix → concept evaluation matrix**.
+- Final architecture decisions:
+  - **Mecanum-wheel omnidirectional base**
+  - **Four-bar-assisted arm concept**
+  - **Gear-driven gripper**
+  - **Servo + turntable-bearing yaw axis**
+
+### Detailed Design & Realization
+- Completed module-level mechanical design and component selection.
+- Delivered full CAD implementation including **3D modeling and assembly** of the integrated system.
+
+### Kinematics / Simulation / Prototyping
+- Performed arm **kinematics** and **workspace analysis**.
+- Validated the design using simulation tools (e.g., **SolidWorks / MATLAB / Adams**).
+- Conducted prototyping, assembly, and debugging to achieve a functional platform.
+
+
+---
+
+## Phase II — System Integration for Navigation + Vision-Based Grasping
+
 <div class="row">
-    <div class="col-sm mt-3 mt-md-0">
-        {% include figure.liquid loading="eager" path="assets/img/5.jpg" title="example image" class="img-fluid rounded z-depth-1" %}
-    </div>
-</div>
-<div class="caption">
-    This image can also have a caption. It's like magic.
-</div>
-
-You can also put regular text between your rows of images, even citations {% cite einstein1950meaning %}.
-Say you wanted to write a bit about your project before you posted the rest of the images.
-You describe how you toiled, sweated, _bled_ for your project, and then... you reveal its glory in the next row of images.
-
-<div class="row justify-content-sm-center">
-    <div class="col-sm-8 mt-3 mt-md-0">
-        {% include figure.liquid path="assets/img/6.jpg" title="example image" class="img-fluid rounded z-depth-1" %}
-    </div>
-    <div class="col-sm-4 mt-3 mt-md-0">
-        {% include figure.liquid path="assets/img/11.jpg" title="example image" class="img-fluid rounded z-depth-1" %}
-    </div>
-</div>
-<div class="caption">
-    You can also have artistically styled 2/3 + 1/3 images, like these.
-</div>
-
-The code is simple.
-Just wrap your images with `<div class="col-sm">` and place them inside `<div class="row">` (read more about the <a href="https://getbootstrap.com/docs/4.4/layout/grid/">Bootstrap Grid</a> system).
-To make images responsive, add `img-fluid` class to each; for rounded corners and shadows use `rounded` and `z-depth-1` classes.
-Here's the code for the last row of images above:
-
-{% raw %}
-
-```html
-<div class="row justify-content-sm-center">
-  <div class="col-sm-8 mt-3 mt-md-0">
-    {% include figure.liquid path="assets/img/6.jpg" title="example image" class="img-fluid rounded z-depth-1" %}
+  <div class="col-sm mt-3 mt-md-0">
+    {% include figure.liquid path="assets/img/projects/1/phase2_m.png"
+      title="Phase II img" class="img-fluid rounded z-depth-1" %}
   </div>
-  <div class="col-sm-4 mt-3 mt-md-0">
-    {% include figure.liquid path="assets/img/11.jpg" title="example image" class="img-fluid rounded z-depth-1" %}
+  <div class="col-sm mt-3 mt-md-0">
+    {% include figure.liquid path="assets/img/projects/1/phase2.png"
+      title="Phase II Robot" class="img-fluid rounded z-depth-1" %}
   </div>
 </div>
-```
 
-{% endraw %}
+
+### Mechanical Integration Updates
+- Designed a camera mount to satisfy depth-camera operating range while reducing LiDAR occlusion.
+- Improved effective camera distance from approximately **52 cm to 64 cm**.
+
+### ROS-Centered Architecture
+- Implemented a modular ROS stack with **gimbal**, **navigation**, **vision**, and **grasp** subsystems.
+- Communication design:
+  - **Navigation ↔ Vision:** ROS **services**
+  - **Vision ↔ Grasp:** **serial communication**
+
+### Navigation Pipeline
+- Built an autonomous navigation workflow including:
+  - **SLAM mapping** （GMapping）
+  - **AMCL localization**
+  - **A\*** global planning
+  - **TEB** local planning 
+  - Obstacle avoidance & control
+  - **RViz** visualization
+  - Fault handling with replanning
+
+### Vision-to-Grasp Loop
+- Established an end-to-end grasping loop:
+  - Object information **encoding/decoding** over serial
+  - Arm motion via **inverse kinematics (IK)**
+  - Robust grasp/place logic with **anti-duplicate triggering** to prevent repeated actions on the same target
+
+
+
+---
+
+## Media
+<div class="row">
+  <div class="col-sm mt-3 mt-md-0">
+    {% include figure.liquid path="assets/img/projects/1/grasp.png"
+      title="grasp" class="img-fluid rounded z-depth-1" %}
+  </div>
+  <div class="col-sm mt-3 mt-md-0">
+    {% include figure.liquid path="assets/img/projects/1/place.png"
+      title="place" class="img-fluid rounded z-depth-1" %}
+  </div>
+</div>
+---
+
+## Tech Stack
+- **Robotics:** ROS, RViz
+- **Navigation:** SLAM (GMapping/Cartographer), AMCL, A\*, TEB
+- **Mechanical / modeling:** linkage-based arm, gear-driven gripper, mecanum base
+- **Simulation:** SolidWorks, MATLAB, Adams
+- **Communication:** ROS services, serial communication
