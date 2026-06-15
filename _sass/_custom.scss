@@ -203,7 +203,7 @@ border: 1px solid rgba(0,0,0,0.12);
   white-space: nowrap;
 }
 
-/* Mobile: stack image on top */
+/* Mobile: stack image on top, but keep it from going full-bleed */
 @media (max-width: 768px) {
   .comp-card {
     flex-direction: column;
@@ -211,11 +211,84 @@ border: 1px solid rgba(0,0,0,0.12);
   .comp-media {
     flex: 0 0 auto;
     width: 100%;
-    height: auto;             /* keep natural height */
+    max-width: 240px;         /* don't let cover images get too large */
+    height: auto;
+    align-self: center;       /* center the capped image */
   }
   .comp-media img {
     height: auto;
   }
+}
+
+/* Mobile: show the about-page portrait as a small round avatar */
+@media (max-width: 575.98px) {
+  .profile {
+    width: auto !important;
+    float: none !important;
+    display: block;
+    margin: 0 auto 1.2rem;
+    text-align: center;
+  }
+  .profile img {
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 50%;
+  }
+}
+
+/* Research */
+.research-item {
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  border-radius: 14px;
+  padding: 16px 18px;
+  margin: 14px 0 20px;
+  background: rgba(255, 255, 255, 0.6);
+}
+
+.research-title {
+  margin: 0 0 6px;
+  line-height: 1.35;
+}
+
+.research-meta {
+  font-size: 0.9rem;
+  opacity: 0.75;
+  margin-bottom: 10px;
+}
+
+.research-sub {
+  opacity: 0.9;
+  line-height: 1.55;
+  margin: 0;
+}
+
+.research-item .comp-link {
+  display: inline-block;
+  margin-top: 12px;
+}
+
+.research-points {
+  margin: 12px 0 0;
+  padding-left: 1.2rem;
+
+  li {
+    margin-bottom: 6px;
+    line-height: 1.5;
+    opacity: 0.9;
+  }
+}
+
+.research-caption {
+  font-size: 0.85rem;
+  opacity: 0.7;
+  text-align: center;
+  margin: 8px 0 0;
+  line-height: 1.45;
+}
+
+.research-item figure {
+  margin: 16px 0 0;
 }
 
 

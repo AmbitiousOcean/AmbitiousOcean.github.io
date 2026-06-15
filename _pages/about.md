@@ -26,7 +26,7 @@ latest_posts:
 ---
 <br>
 
-I am a Robotics M.Sc. student at EPFL, with a minor in Computer Science. I am interested in robot learning—especially reinforcement learning, vision-language(-action) models, and the interplay between perception, control, and real-world deployment.
+I am a Robotics M.Sc. student at EPFL, with a minor in Data Science. I am interested in robot learning—especially reinforcement learning, world (action) model，and the interplay between perception, control, and real-world deployment.
 
 <br>
 
@@ -63,6 +63,45 @@ I have a strong foundation in mathematics and physics, and I also bring extensiv
   <div class="edu-summary-right">
     <a href="{{ '/education/' | relative_url }}" class="edu-summary-link">View details →</a>
   </div>
+</div>
+
+
+<h2><a href="{{ '/blog/' | relative_url }}" style="color: inherit;">Latest posts</a></h2>
+
+{% assign posts_limit = page.latest_posts.limit | default: 3 %}
+{% for post in site.posts limit: posts_limit %}
+<div class="comp-card">
+  <a class="comp-media" href="{{ post.url | relative_url }}">
+    <img src="{{ post.thumbnail | relative_url }}" alt="{{ post.title | strip_html | escape }}">
+  </a>
+
+  <div class="comp-body">
+    <h3 class="comp-title">
+      <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
+    </h3>
+
+    <div class="comp-sub">{{ post.description }}</div>
+
+    <a class="comp-link" href="{{ post.url | relative_url }}">Read more →</a>
+  </div>
+</div>
+{% endfor %}
+
+
+<h2><a href="{{ '/research/' | relative_url }}" style="color: inherit;">Research</a></h2>
+
+<div class="research-item">
+  <h3 class="research-title">
+    <a href="{{ '/research/' | relative_url }}">Learning to Navigate Latent Spaces: Quasimetric Regularization for World-Model-Based Hierarchical Reinforcement Learning</a>
+  </h3>
+
+  <div class="research-meta">Semester project · Laboratory of Intelligent Systems (LIS), EPFL · with Alexander Ertl and Prof. Dario Floreano</div>
+
+  <div class="research-sub">
+    Shaping a world-model latent space with quasimetric (asymmetric distance) regularizers so a single representation supports both prediction and a meaningful cost-to-go for hierarchical reinforcement learning.
+  </div>
+
+  <a class="comp-link" href="{{ '/research/' | relative_url }}">View details →</a>
 </div>
 
 
